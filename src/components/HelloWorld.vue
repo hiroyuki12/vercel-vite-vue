@@ -1,6 +1,8 @@
 <template>
     <div>
     <header className="QiitaApp-header">
+        <a href="https://mbp.hatenablog.com/entry/2022/07/16/213404" target="_blank" rel="noreferrer" className="QiitaApp-link">VercelでVue 3 + Viteのアプリを作成</a><br />
+        <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">VueでQiitaAPIを使って記事情報を取得して表示</a><br />
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
         <div v-if="isClick">
