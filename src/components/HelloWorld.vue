@@ -30,7 +30,6 @@ export default {
     },
     methods: {
         getQiitaData: function() {
-            //axios.get(`https://qiita.com/api/v2/users//tatsuya_1995/items?page=1&per_page=100`, {})
             axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=1&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];

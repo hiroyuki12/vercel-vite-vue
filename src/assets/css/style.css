@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.QiitaApp-header {
+  background-color: #282c34;
+  color: orange;
+}
+
+.QiitaApp-link {
+  color: gray;
+}
