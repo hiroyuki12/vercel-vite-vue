@@ -1,6 +1,7 @@
 <template>
     <div>
-        <button @click="getQiitaData()">取得開始</button>
+        <button @click="getQiitaData()">Vue.js</button>
+        <button @click="getQiitaDataReact()">React</button>
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -31,6 +32,27 @@ export default {
     methods: {
         getQiitaData: function() {
             axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=1&per_page=20`, {})
+            .then(res => {
+                let allQiitaData = [];
+                allQiitaData = res.data;
+
+                let displayQiitaDataList = [];
+                let totalLGTM = 0;
+                allQiitaData.forEach(function (item) {
+                    displayQiitaDataList.push(item);
+                    //totalLGTM += item.likes_count;
+                })
+                // forEach内でthis.displayQiitaDataListへ格納できないので外でやる
+                this.displayQiitaDataList = displayQiitaDataList.sort();
+                this.totalLGTM = totalLGTM;
+                // total記事数を取得
+                this.totalArticle = displayQiitaDataList.length;
+                // clickによる表示の制御
+                this.isClick = true;
+            })
+        },
+        getQiitaDataReact: function() {
+            axios.get(`https://qiita.com/api/v2/tags/React/items?page=1&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
                 allQiitaData = res.data;
