@@ -1,5 +1,6 @@
 <template>
     <div>
+    <header className="QiitaApp-header">
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
         <div v-if="isClick">
@@ -13,6 +14,7 @@
                 <h3>記事数 {{ totalArticle }}コ</h3>// h3で文字サイズ調整すな←
             </div>
         </div>
+    </header>
     </div>
 </template>
 

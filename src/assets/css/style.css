@@ -10,5 +10,9 @@
 }
 
 .QiitaApp-link {
-  color: gray;
+  color: white;
+}
+
+a {
+  text-decoration: none;
 }
