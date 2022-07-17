@@ -3,15 +3,8 @@
         <button @click="getQiitaData()">取得開始</button>
         <div v-if="isClick">
             <table class="table table-striped">
-                <tr>
-                    <th>記事タイトル</th>
-                    <th>URL</th>
-                    <th>投稿日時</th>
-                </tr>
-                <tr v-for="(item, index) in displayQiitaDataList" :key="index">
-                    <td class="text-left">{{ item.title }}</td>
-                    <td ><a :href="item.url">{{ item.url }}</a></td>
-                    <td>{{ item.created_at }}</td>
+                <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
+                    <td class="text-left"><a :href="item.url" target="_blank" rel="noreferrer" className="QiitaApp-link">{{ item.title }}</a> {{item.created_at}}</td>
                 </tr>
             </table>
             <div>
@@ -37,7 +30,7 @@ export default {
     methods: {
         getQiitaData: function() {
             //axios.get(`https://qiita.com/api/v2/users//tatsuya_1995/items?page=1&per_page=100`, {})
-            axios.get(`https://qiita.com/api/v2/tags/React/items?page=1&per_page=20`, {})
+            axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=1&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
                 allQiitaData = res.data;
