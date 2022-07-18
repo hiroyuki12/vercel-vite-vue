@@ -1,11 +1,13 @@
 <template>
     <div>
     <header className="QiitaApp-header">
+        <font color="red"><b>{{error}}</b></font><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/213404" target="_blank" rel="noreferrer" className="QiitaApp-link">VercelでVue 3 + Viteのアプリを作成</a><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">VueでQiitaAPIを使って記事情報を取得して表示</a><br />
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
         page: {{page}}
+        scrollTop: {{top}}, innerHeight: {{inner}}, offsetHeight: {{offfset}}
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -35,9 +37,29 @@ export default {
             isClick: false,
             page: 0,
             allQiitaData: [],
+            top: 0,
+            inner: 0,
+            offset: 0,
+            error: "",
         }
     },
     methods: {
+        getNextPage: function() {
+          window.onscroll = () => {
+            this.top = document.documentElement.scrollTop;
+            this.inner = window.innerHeight;
+            this.offset = document.documentElement.offsetHeight;
+
+            if (
+              window.innerHeight + document.documentElement.scrollTop !==
+              document.documentElement.offsetHeight
+            ) {
+              return;
+            }
+
+            getQiitaData();
+          }
+        },
         getQiitaData: function() {
             this.page = this.page + 1;
             axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=${this.page}&per_page=20`, {})
@@ -59,6 +81,9 @@ export default {
                 // clickによる表示の制御
                 this.isClick = true;
                 this.allQiitaData = allQiitaData;
+            }).catch(err => {
+                this.error = err.message;  // Request failed with status code 403
+                this.error = "Rate limit exceeded";
             })
         },
         getQiitaDataReact: function() {
@@ -84,7 +109,7 @@ export default {
         },
     },
     mounted() {
-      this.getQiitaData();
+      this.getNextPage();
     }
 }
 
