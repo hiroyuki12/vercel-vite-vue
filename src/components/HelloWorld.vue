@@ -7,7 +7,7 @@
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
         page: {{page}}
-        scrollTop: {{top}}, innerHeight: {{inner}}, offsetHeight: {{offfset}}
+        scrollTop: {{top}}, innerHeight: {{inner}}, offsetHeight: {{offset}}, loading: {{isLoading}}
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -15,6 +15,7 @@
 <a :href="item.url" target="_blank" rel="noreferrer" className="QiitaApp-link">{{ item.title }}</a> {{item.created_at}}</td>
                 </tr>
             </table>
+        scrollTop: {{top}}, innerHeight: {{inner}}, offsetHeight: {{offset}}
             <div>
                 <h3>記事数 {{ totalArticle }}コ</h3>// h3で文字サイズ調整すな←
             </div>
@@ -41,6 +42,7 @@ export default {
             inner: 0,
             offset: 0,
             error: "",
+            isLoading: false,
         }
     },
     methods: {
@@ -57,7 +59,8 @@ export default {
               return;
             }
 
-            getQiitaData();
+            this.isLoading = true;
+            this.getQiitaData();
           }
         },
         getQiitaData: function() {
@@ -85,6 +88,7 @@ export default {
                 this.error = err.message;  // Request failed with status code 403
                 this.error = "Rate limit exceeded";
             })
+            this.isLoading = false;
         },
         getQiitaDataReact: function() {
             axios.get(`https://qiita.com/api/v2/tags/React/items?page=1&per_page=20`, {})
