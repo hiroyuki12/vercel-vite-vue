@@ -33,6 +33,7 @@ export default {
             totalLGTM: 0,
             isClick: false,
             page: 1,
+            allQiitaData: [],
         }
     },
     methods: {
@@ -40,7 +41,7 @@ export default {
             axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=${this.page}&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
-                allQiitaData = res.data;
+                allQiitaData = this.allQiitaData.concat(res.data);
 
                 let displayQiitaDataList = [];
                 let totalLGTM = 0;
@@ -56,6 +57,7 @@ export default {
                 // clickによる表示の制御
                 this.isClick = true;
                 this.page = this.page + 1;
+                this.allQiitaData = allQiitaData;
             })
         },
         getQiitaDataReact: function() {
