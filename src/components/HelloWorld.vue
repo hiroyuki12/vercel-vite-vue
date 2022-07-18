@@ -5,6 +5,7 @@
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">VueでQiitaAPIを使って記事情報を取得して表示</a><br />
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
+        page: {{page}}
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -31,11 +32,12 @@ export default {
             totalArticle: 0,
             totalLGTM: 0,
             isClick: false,
+            page: 1,
         }
     },
     methods: {
         getQiitaData: function() {
-            axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=1&per_page=20`, {})
+            axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=${this.page}&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
                 allQiitaData = res.data;
@@ -53,6 +55,7 @@ export default {
                 this.totalArticle = displayQiitaDataList.length;
                 // clickによる表示の制御
                 this.isClick = true;
+                this.page = this.page + 1;
             })
         },
         getQiitaDataReact: function() {
