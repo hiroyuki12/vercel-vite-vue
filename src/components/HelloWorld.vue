@@ -19,6 +19,7 @@
         </div>
     </header>
     </div>
+<infinite-loading @infinite="getQiitaData"></infinite-loading>
 </template>
 
 <script>
@@ -32,12 +33,13 @@ export default {
             totalArticle: 0,
             totalLGTM: 0,
             isClick: false,
-            page: 1,
+            page: 0,
             allQiitaData: [],
         }
     },
     methods: {
         getQiitaData: function() {
+            this.page = this.page + 1;
             axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=${this.page}&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
@@ -56,7 +58,6 @@ export default {
                 this.totalArticle = displayQiitaDataList.length;
                 // clickによる表示の制御
                 this.isClick = true;
-                this.page = this.page + 1;
                 this.allQiitaData = allQiitaData;
             })
         },
