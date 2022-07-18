@@ -82,6 +82,9 @@ export default {
                 this.isClick = true;
             })
         },
+    },
+    mounted() {
+      this.getQiitaData();
     }
 }
 
