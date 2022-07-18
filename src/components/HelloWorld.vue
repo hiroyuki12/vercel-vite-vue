@@ -7,7 +7,6 @@
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
         page: {{page}}
-        scrollTop: {{top}}, innerHeight: {{inner}}, offsetHeight: {{offset}}, loading: {{isLoading}}
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -15,7 +14,11 @@
 <a :href="item.url" target="_blank" rel="noreferrer" className="QiitaApp-link">{{ item.title }}</a> {{item.created_at}}</td>
                 </tr>
             </table>
-        scrollTop: {{top}}, innerHeight: {{inner}}, offsetHeight: {{offset}}
+        Page: {{page}}, tag: Vue.js, Loading: {{isLoading}}
+        <br />
+        <p v-if="isLoading">
+          Loading .... page: {{page}}/20posts/{{20*(page-1)+1}}</p>
+        <p v-else>Not Loading. page: {{page}}/20posts/{{20*(page-1)+1}}</p>
             <div>
                 <h3>記事数 {{ totalArticle }}コ</h3>// h3で文字サイズ調整すな←
             </div>
