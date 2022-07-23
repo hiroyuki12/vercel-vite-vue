@@ -6,7 +6,7 @@
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">Vite + VueでQiitaAPIを使って記事情報を取得して表示、無限スクロール Vercel</a><br />
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
-        page: {{page}}, tag:Vue.js
+        tag:Vue.js
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -14,15 +14,12 @@
 <a :href="item.url" target="_blank" rel="noreferrer" className="QiitaApp-link">{{ item.title }}</a> {{item.created_at}}</td>
                 </tr>
             </table>
-        Page: {{page}}, tag: Vue.js, Loading: {{isLoading}}
-        <br />
-        <p v-if="isLoading">
-          Loading .... page: {{page}}/20posts/{{20*(page-1)+1}}</p>
+        </div>
+        <p v-if="isLoading">Loading .... page: {{page}}/20posts/{{20*(page-1)+1}}</p>
         <p v-else>Not Loading. page: {{page}}/20posts/{{20*(page-1)+1}}</p>
             <div>
                 <h3>記事数 {{ totalArticle }}コ</h3>// h3で文字サイズ調整すな←
             </div>
-        </div>
     </header>
     </div>
 <infinite-loading @infinite="getQiitaData"></infinite-loading>
