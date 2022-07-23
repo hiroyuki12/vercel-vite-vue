@@ -6,7 +6,7 @@
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">Vite + VueでQiitaAPIを使って記事情報を取得して表示、無限スクロール Vercel</a><br />
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
-        page: {{page}}
+        page: {{page}}, tag:Vue.js
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
