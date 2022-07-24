@@ -6,7 +6,7 @@
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">Vite + VueでQiitaAPIを使って記事情報を取得して表示、無限スクロール Vercel</a><br />
         <button @click="getQiitaData()">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
-        tag:Vue.js
+        {{tag}}
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -15,8 +15,8 @@
                 </tr>
             </table>
         </div>
-        <p v-if="isLoading">Loading .... page: {{page}}/20posts/{{20*(page-1)+1}}</p>
-        <p v-else>Not Loading. page: {{page}}/20posts/{{20*(page-1)+1}}</p>
+        <p v-if="isLoading">Loading .... page: {{page}}/20posts/{{20*(page-1)+1}}-</p>
+        <p v-else>Not Loading. page: {{page}}/20posts/{{20*(page-1)+1}}-</p>
             <div>
                 <h3>記事数 {{ totalArticle }}コ</h3>// h3で文字サイズ調整すな←
             </div>
@@ -37,6 +37,8 @@ export default {
             totalLGTM: 0,
             isClick: false,
             page: 0,
+            tag: "Vue.js",
+            //tag: "React",
             allQiitaData: [],
             top: 0,
             inner: 0,
@@ -59,13 +61,13 @@ export default {
               return;
             }
 
-            this.isLoading = true;
             this.getQiitaData();
           }
         },
         getQiitaData: function() {
+            this.isLoading = true;
             this.page = this.page + 1;
-            axios.get(`https://qiita.com/api/v2/tags/Vue.js/items?page=${this.page}&per_page=20`, {})
+            axios.get(`https://qiita.com/api/v2/tags/${this.tag}/items?page=${this.page}&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
                 allQiitaData = this.allQiitaData.concat(res.data);
@@ -88,9 +90,10 @@ export default {
                 this.error = err.message;  // Request failed with status code 403
                 this.error = "Rate limit exceeded";
             })
-            this.isLoading = false;
+            //this.isLoading = false;
         },
         getQiitaDataReact: function() {
+            this.tag = "React";
             axios.get(`https://qiita.com/api/v2/tags/React/items?page=1&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
