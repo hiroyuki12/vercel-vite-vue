@@ -10,7 +10,7 @@
         <div v-if="isClick">
             <table class="table table-striped">
                 <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
-                    <td class="text-left"><img :src="item.user.profile_image_url" width="50" height="50" loading="lazy" alt="img" />
+                    <td class="card-container"><img :src="item.user.profile_image_url" width="50" height="50" loading="lazy" alt="img" />
 <a :href="item.url" target="_blank" rel="noreferrer" className="QiitaApp-link">{{ item.title }}</a> {{item.created_at}}</td>
                 </tr>
             </table>
@@ -121,3 +121,21 @@ export default {
 }
 
 </script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.QiitaApp-header {
+  background-color: #282c34;
+  color: orange;
+}
+.QiitaApp-link {
+  color: white;
+}
+a {
+  text-decoration: none;
+}
+</style>
