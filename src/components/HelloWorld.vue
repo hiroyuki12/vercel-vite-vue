@@ -8,12 +8,19 @@
         <button @click="getQiitaDataReact()">React</button>
         {{tag}}
         <div v-if="isClick">
-            <table class="table table-striped">
-                <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
-                    <td class="card-container"><img :src="item.user.profile_image_url" width="50" height="50" loading="lazy" alt="img" />
-<a :href="item.url" target="_blank" rel="noreferrer" className="QiitaApp-link">{{ item.title }}</a> {{item.created_at}}</td>
-                </tr>
-            </table>
+          <table class="table table-striped">
+            <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
+              <td class="card-container">
+                <img :src="item.user.profile_image_url" width="50" height="50" loading="lazy" alt="img" />
+                <div class="card-text">
+                  <a :href="item.url" target="_blank" rel="noreferrer" className="QiitaApp-link">{{ item.title }}</a> 
+                  <div class="card-text2">
+                    <p>{{item.created_at}}</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
         <p v-if="isLoading">Loading .... page: {{page}}/20posts/{{20*(page-1)+1}}-</p>
         <p v-else>Not Loading. page: {{page}}/20posts/{{20*(page-1)+1}}-</p>
@@ -137,5 +144,29 @@ export default {
 }
 a {
   text-decoration: none;
+}
+.card-container{
+  display: flex;
+  height: 34px;
+}
+
+.card-text a{
+  color: white;
+  font-size: 14px;
+  line-height: 1.2em;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.card-text2{
+  font-size: 11px;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 </style>
