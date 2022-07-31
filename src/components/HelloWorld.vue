@@ -15,7 +15,7 @@
                 <div class="card-text">
                   <a :href="item.url" target="_blank" rel="noreferrer" className="QiitaApp-link">{{ item.title }}</a> 
                   <div class="card-text2">
-                    <p>{{item.created_at}}</p>
+                    <p>{{item.created_at}} / {{item.tags[0].name}} / {{item.likes_count}}likes / {{item.user.items_count}}posts </p>
                   </div>
                 </div>
               </td>
