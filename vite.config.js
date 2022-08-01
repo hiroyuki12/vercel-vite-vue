@@ -7,5 +7,5 @@ export default defineConfig({
   server: {
     open: true,
   },
-  plugins: [vue(),ViewPWA()]
+  plugins: [vue(),VitePWA()]
 })
