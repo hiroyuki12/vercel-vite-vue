@@ -4,9 +4,11 @@
         <font color="red"><b>{{error}}</b></font><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/213404" target="_blank" rel="noreferrer" className="QiitaApp-link">VercelでVue 3 + Viteのアプリを作成(vercel-vite-vue)</a><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">Vite + VueでQiitaAPIを使って記事情報を取得して表示、無限スクロール Vercel</a><br />
-        <button @click="getQiitaData()">Vue.js</button>
+        <button @click="getQiitaData('react')">React</button>
+        <button @click="getQiitaData('vue.js')">Vue.js</button>
         <button @click="getQiitaDataReact()">React</button>
-        {{tag}}
+        {{tag}}<br />
+        <button @click="pageButtonClick()">__10__</button>{{page}}
         <div v-if="isClick">
           <table class="table table-striped">
             <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -68,13 +70,13 @@ export default {
               return;
             }
 
-            this.getQiitaData();
+            this.getQiitaData(this.tag);
           }
         },
-        getQiitaData: function() {
+        getQiitaData: function(tag) {
             this.isLoading = true;
             this.page = this.page + 1;
-            axios.get(`https://qiita.com/api/v2/tags/${this.tag}/items?page=${this.page}&per_page=20`, {})
+            axios.get(`https://qiita.com/api/v2/tags/${tag}/items?page=${this.page}&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
                 allQiitaData = this.allQiitaData.concat(res.data);
@@ -121,9 +123,18 @@ export default {
                 this.isClick = true;
             })
         },
+        pageButtonClick: function() {
+            this.page = 10;
+        },
+        outputTest: function() {
+            console.log(page);
+        },
     },
     mounted() {
       this.getNextPage();
+    },
+    watch: {
+      tag: 'outputTest'
     }
 }
 
