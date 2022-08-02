@@ -74,6 +74,7 @@ export default {
           }
         },
         getQiitaData: function(tag) {
+            this.tag = tag;
             this.isLoading = true;
             this.page = this.page + 1;
             axios.get(`https://qiita.com/api/v2/tags/${tag}/items?page=${this.page}&per_page=20`, {})
@@ -133,9 +134,9 @@ export default {
     mounted() {
       this.getNextPage();
     },
-    watch: {
-      tag: 'outputTest'
-    }
+    //watch: {
+    //  tag: 'outputTest'
+    //}
 }
 
 </script>
