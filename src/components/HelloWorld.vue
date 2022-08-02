@@ -14,7 +14,6 @@
         <button @click="tagButtonClick('aws')">AWS</button>
         <button @click="tagButtonClick('.NET')">.NET</button>
         <button @click="tagButtonClick('Flutter')">Flutter</button>
-        <button @click="clearButtonClick()">__Clear</button>
         {{tag}}<br />
         page:<button @click="pageButtonClick('0')">__1__</button>
         __:<button @click="pageButtonClick('9')">__10__</button>
@@ -53,7 +52,7 @@ export default {
             displayQiitaDataList: "",
             totalArticle: 0,
             isClick: false,
-            page: 0,
+            page: 1,
             tag: "Vue.js",
             allQiitaData: [],
             error: "",
@@ -69,8 +68,8 @@ export default {
         tagButtonClick: function(tag) {
           this.tag = tag;
           //this.page = 0;
-          //this.allQiitaData.splice(0);
-          //this.displayQiitaDataList.splice(0);
+          this.allQiitaData = [];
+          this.displayQiitaDataList = [];
 
           this.getQiitaData();
         },
@@ -83,12 +82,12 @@ export default {
               return;
             }
 
+            this.page = this.page + 1;
             this.getQiitaData();
           }
         },
         getQiitaData: function() {
             this.isLoading = true;
-            this.page = this.page + 1;
             axios.get(`https://qiita.com/api/v2/tags/${this.tag}/items?page=${this.page}&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
