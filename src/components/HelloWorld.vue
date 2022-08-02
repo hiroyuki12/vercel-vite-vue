@@ -5,10 +5,20 @@
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/213404" target="_blank" rel="noreferrer" className="QiitaApp-link">VercelでVue 3 + Viteのアプリを作成(vercel-vite-vue)</a><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">Vite + VueでQiitaAPIを使って記事情報を取得して表示、無限スクロール Vercel</a><br />
         <button @click="tagButtonClick('react')">React</button>
+        <button @click="tagButtonClick('next.js')">Next.js</button>
         <button @click="tagButtonClick('vue.js')">Vue.js</button>
-        <button @click="clearButtonClick()">Clear</button>
+        <button @click="tagButtonClick('nuxt')">Nuxt.js</button>
+        <button @click="tagButtonClick('swift')">Swift</button>
+        <button @click="tagButtonClick('vim')">Vim</button>
+        <button @click="tagButtonClick('azure')">Azure</button>
+        <button @click="tagButtonClick('aws')">AWS</button>
+        <button @click="tagButtonClick('.NET')">.NET</button>
+        <button @click="tagButtonClick('Flutter')">Flutter</button>
+        <button @click="clearButtonClick()">__Clear</button>
         {{tag}}<br />
-        <button @click="pageButtonClick()">__10__</button>{{page}}
+        page:<button @click="pageButtonClick('0')">__1__</button>
+        __:<button @click="pageButtonClick('9')">__10__</button>
+        __:<button @click="pageButtonClick('49')">__50__</button>{{page}}
         <div v-if="isClick">
           <table class="table table-striped">
             <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -40,24 +50,18 @@ import axios from "axios";
 export default {
     data() {
         return {
-            //userId: "",
             displayQiitaDataList: "",
             totalArticle: 0,
-            //totalLGTM: 0,
             isClick: false,
             page: 0,
             tag: "Vue.js",
             allQiitaData: [],
-            //top: 0,
-            //inner: 0,
-            //offset: 0,
             error: "",
             isLoading: false,
         }
     },
     methods: {
         clearButtonClick: function() {
-          this.page = 0;
           this.tag = "";
           this.allQiitaData.splice(0);
           this.displayQiitaDataList.splice(0);
@@ -72,10 +76,6 @@ export default {
         },
         getNextPage: function() {
           window.onscroll = () => {
-            //this.top = document.documentElement.scrollTop;
-            //this.inner = window.innerHeight;
-            //this.offset = document.documentElement.offsetHeight;
-
             if (
               window.innerHeight + document.documentElement.scrollTop !==
               document.documentElement.offsetHeight
@@ -89,21 +89,18 @@ export default {
         getQiitaData: function() {
             this.isLoading = true;
             this.page = this.page + 1;
-            //axios.get(`https://qiita.com/api/v2/tags/${tag}/items?page=${this.page}&per_page=20`, {})
             axios.get(`https://qiita.com/api/v2/tags/${this.tag}/items?page=${this.page}&per_page=20`, {})
             .then(res => {
                 let allQiitaData = [];
                 allQiitaData = this.allQiitaData.concat(res.data);
 
                 let displayQiitaDataList = [];
-                //let totalLGTM = 0;
                 allQiitaData.forEach(function (item) {
                     displayQiitaDataList.push(item);
                     //totalLGTM += item.likes_count;
                 })
                 // forEach内でthis.displayQiitaDataListへ格納できないので外でやる
                 this.displayQiitaDataList = displayQiitaDataList.sort();
-                //this.totalLGTM = totalLGTM;
                 // total記事数を取得
                 this.totalArticle = displayQiitaDataList.length;
                 // clickによる表示の制御
@@ -115,8 +112,9 @@ export default {
             })
             //this.isLoading = false;
         },
-        pageButtonClick: function() {
-            this.page = 10;
+        pageButtonClick: function(target) {
+            const tmp = parseInt(target,10);
+            this.page = tmp;
         },
         outputTest: function() {
             console.log(page);
