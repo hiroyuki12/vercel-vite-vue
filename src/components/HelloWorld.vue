@@ -1,7 +1,8 @@
 <template>
     <div>
     <header className="QiitaApp-header">
-        <font color="red"><b>{{error}}</b></font><br />
+        <font color="red"><b>{{error}}</b></font>
+        <font color="red"><b>{{errorMessage}}</b></font><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/213404" target="_blank" rel="noreferrer" className="QiitaApp-link">VercelでVue 3 + Viteのアプリを作成(vercel-vite-vue)</a><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">Vite + VueでQiitaAPIを使って記事情報を取得して表示、無限スクロール Vercel</a><br />
         <button @click="tagButtonClick('react')">React</button>
@@ -60,6 +61,7 @@ export default {
             tag: "Vue.js",
             allQiitaData: [],
             error: "",
+            errorMessage: "",
             isLoading: false,
         }
     },
@@ -101,7 +103,6 @@ export default {
                 allQiitaData.forEach(function (item) {
                     item.updated_at= dayjs(item.created_at).fromNow() // => days ago
                     displayQiitaDataList.push(item);
-                    //totalLGTM += item.likes_count;
                 })
                 // forEach内でthis.displayQiitaDataListへ格納できないので外でやる
                 this.displayQiitaDataList = displayQiitaDataList.sort();
@@ -113,6 +114,7 @@ export default {
             }).catch(err => {
                 //this.error = err.message;  // Request failed with status code 403
                 this.error = "Rate limit exceeded";
+                this.errorMessage = err.message;  // Request failed with status code 403
             })
             //this.isLoading = false;
         },
