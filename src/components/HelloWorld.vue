@@ -127,6 +127,9 @@ export default {
     mounted() {
       this.getNextPage();
     },
+    created() {
+      this.getQiitaData();
+    },
     //watch: {
     //  tag: 'outputTest'
     //}
