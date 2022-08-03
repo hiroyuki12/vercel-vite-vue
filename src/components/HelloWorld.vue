@@ -45,6 +45,10 @@
 
 <script>
 import axios from "axios";
+import dayjs, { extend } from "dayjs";
+// 相対日時のプラグインを有効化
+import relativeTime from "dayjs/plugin/relativeTime";
+extend(relativeTime);
 
 export default {
     data() {
@@ -95,6 +99,7 @@ export default {
 
                 let displayQiitaDataList = [];
                 allQiitaData.forEach(function (item) {
+                    item.created_at = dayjs(item.created_at).fromNow() // => days ago
                     displayQiitaDataList.push(item);
                     //totalLGTM += item.likes_count;
                 })
