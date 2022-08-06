@@ -5,14 +5,14 @@
         <font color="red"><b>{{errorMessage}}</b></font><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/213404" target="_blank" rel="noreferrer" className="QiitaApp-link">VercelでVue 3 + Viteのアプリを作成(vercel-vite-vue)</a><br />
         <a href="https://mbp.hatenablog.com/entry/2022/07/16/222139" target="_blank" rel="noreferrer" className="QiitaApp-link">Vite + VueでQiitaAPIを使って記事情報を取得して表示、無限スクロール Vercel</a><br />
-        <button @click="tagButtonClick('react')">React</button>
-        <button @click="tagButtonClick('next.js')">Next.js</button>
-        <button @click="tagButtonClick('vue.js')">Vue.js</button>
-        <button @click="tagButtonClick('nuxt')">Nuxt.js</button>
-        <button @click="tagButtonClick('swift')">Swift</button>
-        <button @click="tagButtonClick('vim')">Vim</button>
-        <button @click="tagButtonClick('azure')">Azure</button>
-        <button @click="tagButtonClick('aws')">AWS</button>
+        <button @click="tagButtonClick('React')">React</button>
+        <button @click="tagButtonClick('Next.js')">Next.js</button>
+        <button @click="tagButtonClick('Vue.js')">Vue.js</button>
+        <button @click="tagButtonClick('Nuxt')">Nuxt.js</button>
+        <button @click="tagButtonClick('Swift')">Swift</button>
+        <button @click="tagButtonClick('Vim')">Vim</button>
+        <button @click="tagButtonClick('Azure')">Azure</button>
+        <button @click="tagButtonClick('AWS')">AWS</button>
         <button @click="tagButtonClick('.NET')">.NET</button>
         <button @click="tagButtonClick('Flutter')">Flutter</button>
         {{tag}}<br />
@@ -40,6 +40,7 @@
                 <h3>記事数 {{ totalArticle }}コ</h3>// h3で文字サイズ調整すな←
             </div>
     </header>
+    <div className="QiitaApp-footer">{{tag}} Page {{page}}/20posts</div>
     </div>
 <infinite-loading @infinite="getQiitaData"></infinite-loading>
 </template>
@@ -144,6 +145,15 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.QiitaApp-footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 60px;
+  background-color: #282c44;
+  text-align: center;
+  color: white;
 }
 .QiitaApp-header {
   background-color: #282c34;
