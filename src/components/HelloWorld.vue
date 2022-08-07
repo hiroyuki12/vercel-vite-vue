@@ -102,7 +102,7 @@ export default {
 
                 let displayQiitaDataList = [];
                 allQiitaData.forEach(function (item) {
-                    item.updated_at= dayjs(item.created_at).fromNow() // => days ago
+                    item.updated_at= dayjs(item.created_at).fromNow(true) // => days
                     displayQiitaDataList.push(item);
                 })
                 // forEach内でthis.displayQiitaDataListへ格納できないので外でやる
