@@ -175,7 +175,7 @@ a {
   color: white;
   font-size: 14px;
   line-height: 1.2em;
-  height: 26px;
+  height: 30px;
   margin: 4px;
 
   overflow: hidden;
