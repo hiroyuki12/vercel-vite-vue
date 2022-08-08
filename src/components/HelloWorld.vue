@@ -167,13 +167,16 @@ a {
 }
 .card-container{
   display: flex;
-  height: 34px;
+  height: 38px;
+  margin: 4px;
 }
 
 .card-text a{
   color: white;
   font-size: 14px;
   line-height: 1.2em;
+  height: 26px;
+  margin: 4px;
 
   overflow: hidden;
   display: -webkit-box;
@@ -183,6 +186,7 @@ a {
 
 .card-text2{
   font-size: 11px;
+  margin: 4px;
 
   overflow: hidden;
   display: -webkit-box;
