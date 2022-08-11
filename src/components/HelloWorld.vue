@@ -18,8 +18,9 @@
         <button @click="tagButtonClick('Flutter')">Flutter</button>
         {{tag}}<br />
         page:<button @click="pageButtonClick('1')">__1__</button>
+        __:<button @click="pageButtonClick('20')">__20__</button>
         __:<button @click="pageButtonClick('50')">__50__</button>
-        __:<button @click="pageButtonClick('100')">__100__</button>{{page}}<br /><br />
+        __:<button @click="pageButtonClick('90')">__90__</button>{{page}}/{{perPage}}posts<br /><br />
         <div v-if="isClick">
           <table class="table table-striped">
             <tr v-for="(item, index) in displayQiitaDataList" :key="index" align="left">
@@ -35,13 +36,13 @@
             </tr>
           </table>
         </div>
-        <p v-if="isLoading">Loading .... page: {{page}}/20posts/{{20*(page-1)+1}}-</p>
-        <p v-else>Not Loading. page: {{page}}/20posts/{{20*(page-1)+1}}-</p>
+        <p v-if="isLoading">Loading .... page: {{page}}/{{perPage}}posts/{{perPage*(page-1)+1}}-</p>
+        <p v-else>Not Loading. page: {{page}}/{{perPage}}posts/{{perPage*(page-1)+1}}-</p>
             <div>
                 <h3>記事数 {{ totalArticle }}コ</h3>// h3で文字サイズ調整すな←
             </div>
     </header>
-    <div className="QiitaApp-footer">{{tag}} Page {{page}}/20posts</div>
+    <div className="QiitaApp-footer">{{tag}} Page {{page}}/{{perPage}}posts</div>
     </div>
 <infinite-loading @infinite="getQiitaData"></infinite-loading>
 </template>
@@ -60,6 +61,7 @@ export default {
             totalArticle: 0,
             isClick: false,
             page: 1,
+            perPage: 20,
             tag: "Vue.js",
             allQiitaData: [],
             error: "",
@@ -74,6 +76,7 @@ export default {
           this.displayQiitaDataList.splice(0);
         },
         tagButtonClick: function(tag) {
+          this.perPage = 100;
           this.tag = tag;
           //this.page = 0;
           this.allQiitaData = [];
@@ -101,7 +104,7 @@ export default {
         },
         getQiitaData: function() {
             this.isLoading = true;
-            axios.get(`https://qiita.com/api/v2/tags/${this.tag}/items?page=${this.page}&per_page=20`, {})
+            axios.get(`https://qiita.com/api/v2/tags/${this.tag}/items?page=${this.page}&per_page=${this.perPage}`, {})
             .then(res => {
                 let allQiitaData = [];
                 allQiitaData = this.allQiitaData.concat(res.data);
