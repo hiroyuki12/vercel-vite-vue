@@ -85,10 +85,14 @@ export default {
           this.getQiitaData();
         },
         pageButtonClick: function(target) {
-            this.perPage = 100;
-            const tmp = parseInt(target,10);
-            this.page = tmp;
-            this.tagButtonClick(this.tag);
+          this.perPage = 100;
+          const tmp = parseInt(target,10);
+          this.page = tmp;
+          //this.tagButtonClick(this.tag);
+          this.allQiitaData = [];
+          this.displayQiitaDataList = [];
+
+          this.getQiitaData();
         },
         getNextPage: function() {
           window.onscroll = () => {
