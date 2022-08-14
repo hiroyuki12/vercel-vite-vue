@@ -76,7 +76,7 @@ export default {
           this.displayQiitaDataList.splice(0);
         },
         tagButtonClick: function(tag) {
-          this.perPage = 100;
+          this.perPage = 20;
           this.tag = tag;
           //this.page = 0;
           this.allQiitaData = [];
@@ -85,6 +85,7 @@ export default {
           this.getQiitaData();
         },
         pageButtonClick: function(target) {
+            this.perPage = 100;
             const tmp = parseInt(target,10);
             this.page = tmp;
             this.tagButtonClick(this.tag);
