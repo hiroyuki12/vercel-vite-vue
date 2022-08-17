@@ -185,7 +185,7 @@ a {
   color: white;
   font-size: 14px;
   line-height: 1.2em;
-  height: 30px;
+  height: 32px;
   margin: 4px;
 
   overflow: hidden;
