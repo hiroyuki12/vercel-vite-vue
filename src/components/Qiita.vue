@@ -78,7 +78,7 @@ export default {
         tagButtonClick: function(tag) {
           this.perPage = 20;
           this.tag = tag;
-          //this.page = 0;
+          this.page = 1;
           this.allQiitaData = [];
           this.displayQiitaDataList = [];
 
